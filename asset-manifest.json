@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/GHU/static/css/main.05a9d0c8.css",
+    "main.js": "/GHU/static/js/main.61c6b87e.js",
+    "index.html": "/GHU/index.html",
+    "main.05a9d0c8.css.map": "/GHU/static/css/main.05a9d0c8.css.map",
+    "main.61c6b87e.js.map": "/GHU/static/js/main.61c6b87e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.05a9d0c8.css",
+    "static/js/main.61c6b87e.js"
+  ]
+}
