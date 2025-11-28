@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Insights - Centralized Student Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0d9488;
+            --color-secondary: #1e3a8a;
+            --color-accent: #06b6d4;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-light: #64748b;
+            --color-border: #e2e8f0;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode {
+            --color-bg: #0f172a;
+            --color-bg-secondary: #1e293b;
+            --color-text: #f1f5f9;
+            --color-text-light: #94a3b8;
+            --color-border: #334155;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--color-primary);
+            background: var(--color-bg-secondary);
+        }
+        .dark-toggle {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-md);
+        }
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-light);
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        .dashboard-link {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            color: white;
+            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            box-shadow: var(--shadow-lg);
+        }
+        .dashboard-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+        .dashboard-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            transition: all 0.3s;
+        }
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+        .insight-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+        .insight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .insight-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+        .insight-card h3 {
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+        }
+        .insight-card p {
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+        .dashboard-screenshot {
+            background: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin: var(--spacing-xl) 0;
+            text-align: center;
+        }
+        .dashboard-screenshot img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+        }
+        .dashboard-screenshot p {
+            margin-top: var(--spacing-md);
+            color: var(--color-text-light);
+            font-style: italic;
+        }
+        .key-findings {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.05), rgba(6, 182, 212, 0.05));
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text);
+        }
+        .findings-list {
+            list-style: none;
+            margin-top: var(--spacing-md);
+        }
+        .findings-list li {
+            padding: var(--spacing-md);
+            background: var(--color-bg);
+            border-left: 4px solid var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+        .findings-list strong {
+            color: var(--color-primary);
+        }
+        footer {
+            background: var(--color-bg-secondary);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-xl) var(--spacing-md);
+            margin-top: var(--spacing-2xl);
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        .footer-section h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        .footer-section a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-light);
+        }
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90%; max-height: 90%; }
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: var(--spacing-md);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-toggle { display: block; }
+            .insights-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="./index.html" class="nav-brand">CSD Project</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./problem.html">Problem</a></li>
+                <li><a href="./research.html">Research</a></li>
+                <li><a href="./solution.html">Solution</a></li>
+                <li><a href="./architecture.html">Architecture</a></li>
+                <li><a href="./data.html">Data</a></li>
+                <li><a href="./dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="./ethics.html">Ethics</a></li>
+                <li><a href="./lessons.html">Lessons</a></li>
+                <li><a href="./appendix.html">Appendix</a></li>
+                <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="page-title">Dashboard & Insights</h1>
+        <p class="page-subtitle">Interactive analytics and key findings from the live dashboard</p>
+
+        <div class="dashboard-link">
+            <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank">
+                🚀 Open Live Dashboard →
+            </a>
+        </div>
+
+        <h2 class="section-title">Dashboard Features</h2>
+        <div class="insights-grid">
+            <div class="insight-card">
+                <div class="insight-icon">📊</div>
+                <h3>KPI Cards</h3>
+                <p>Quick visualization of key performance indicators including Retention Rate (70.9%), Average GPA (2.77), and Students Identified At-Risk (291).</p>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon">📈</div>
+                <h3>Performance Charts</h3>
+                <p>Track GPA trends across departments, compare program performance, and identify areas for improvement through interactive visualizations.</p>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon">👥</div>
+                <h3>Engagement Distribution</h3>
+                <p>Understand student engagement levels across the institution, identifying patterns that correlate with retention and academic success.</p>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon">🏠</div>
+                <h3>Housing Analytics</h3>
+                <p>Analyze housing preferences and their correlation with retention rates, showing on-campus students have 18% higher retention.</p>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon">🎯</div>
+                <h3>360° Student Profiles</h3>
+                <p>Access comprehensive personalized analytics for proactive student support and targeted interventions based on multi-factor risk assessment.</p>
+            </div>
+
+            <div class="insight-card">
+                <div class="insight-icon">⚡</div>
+                <h3>Pulse Tracker</h3>
+                <p>Real-time prioritized view of at-risk students enabling advisors to focus interventions on highest-need cases first.</p>
+            </div>
+        </div>
+
+        <div class="dashboard-screenshot">
+            <img src="./images/dashboard-main.png" alt="Dashboard Main View" onclick="openLightbox(this)">
+            <p>Figure 3: Main Dashboard View - KPI cards, department performance charts, and engagement distributions<br>
+            (Source: <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank" style="color: var(--color-primary);">Live Dashboard</a>)</p>
+        </div>
+
+        <div class="dashboard-screenshot">
+            <img src="./images/dashboard-profile.png" alt="Student 360 Profile" onclick="openLightbox(this)">
+            <p>Figure 4: Student 360° Profile - Comprehensive individual student view with risk assessment and intervention history<br>
+            (Source: <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank" style="color: var(--color-primary);">Live Dashboard</a>)</p>
+        </div>
+
+        <div class="key-findings">
+            <h2 class="section-title">Key Data Insights</h2>
+            <p>Analysis of our dashboard data reveals critical patterns driving student retention and success:</p>
+            <ul class="findings-list">
+                <li><strong>Dropout Risk:</strong> 29.1% of students (291 out of 1,000) are currently identified as at-risk based on multi-factor assessment.</li>
+                <li><strong>Departmental Performance:</strong> Engineering and Computer Science departments outperform Psychology and Mathematics in average GPA, indicating potential curriculum or resource allocation differences.</li>
+                <li><strong>Financial Stress Impact:</strong> Students with debt exceeding $15,000 face double the dropout risk compared to those with lower balances, highlighting the critical need for targeted financial aid.</li>
+                <li><strong>Scholarship Effectiveness:</strong> Scholarships increase student retention rates by 33 percentage points, demonstrating significant ROI on financial aid investments.</li>
+                <li><strong>Engagement Threshold:</strong> Engagement scores below 50 are strongly predictive of GPA decline, identifying a critical early warning indicator.</li>
+                <li><strong>Housing Advantage:</strong> On-campus students exhibit an 18% higher retention rate than off-campus students, suggesting the value of campus community integration.</li>
+                <li><strong>Long-Term Improvement:</strong> Horizon State University's 5-year retention rate has improved from 78% to 90%, demonstrating sustained progress in student success initiatives.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Project</h4>
+                <p>Centralized Student Dashboard</p>
+                <p>Horizon State University</p>
+            </div>
+            <div class="footer-section">
+                <h4>Team</h4>
+                <p>Shashank Manchikatla</p>
+                <p>Hari Siva Sai Teja Mogali</p>
+                <p>Manindra Porandla</p>
+                <p>Manohar Naidu Talari</p>
+                <p>Sandeep Thota</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank">Live Dashboard</a>
+                <a href="./appendix.html">Project Resources</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Group 20 - QuadraMind. Last Updated: January 2025</p>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Enlarged view">
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            document.querySelector('.dark-toggle').textContent = isDark ? '☀️' : '🌙';
+        }
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.dark-toggle').textContent = '☀️';
+        }
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        function openLightbox(img) {
+            document.getElementById('lightbox').classList.add('active');
+            document.getElementById('lightboxImg').src = img.src;
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.getAttribute('href').includes(currentPage)) link.classList.add('active');
+        });
+    </script>
+</body>
+</html>
