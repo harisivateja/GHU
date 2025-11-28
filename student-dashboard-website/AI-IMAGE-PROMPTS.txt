@@ -1,0 +1,223 @@
+# AI IMAGE GENERATION PROMPTS
+For Centralized Student Dashboard Website
+
+Generate these images using DALL-E, Midjourney, Stable Diffusion, or similar AI image generators.
+Save generated images to /images/ directory with the specified filenames.
+
+═══════════════════════════════════════════════════════════════
+REQUIRED IMAGES (From Project Materials)
+═══════════════════════════════════════════════════════════════
+
+1. ARCHITECTURE DIAGRAM
+   Filename: architecture-diagram.png
+   Source: Extract from your project report (Appendix A)
+   Description: Three-tier architecture showing React frontend, FastAPI backend, 
+                and MongoDB database with data flow arrows
+
+2. ER DIAGRAM  
+   Filename: er-diagram.png
+   Source: Extract from your project report (Appendix B)
+   Description: Entity Relationship Diagram showing 6 entities (Students, 
+                Financials, Housing, Enrollments, Courses, Advisors/Alerts) 
+                with Student_ID as linking Foreign Key
+
+3. DASHBOARD SCREENSHOT - Main View
+   Filename: dashboard-main.png
+   Source: Screenshot from https://harisivasaiteja.github.io/Studentdashboard/
+   Description: Capture the main dashboard view showing KPI cards, department 
+                performance charts, and engagement distributions
+
+4. DASHBOARD SCREENSHOT - Student Profile
+   Filename: dashboard-profile.png
+   Source: Screenshot from https://harisivasaiteja.github.io/Studentdashboard/
+   Description: Capture the Student 360° Profile view showing comprehensive 
+                individual student data and risk assessment
+
+
+═══════════════════════════════════════════════════════════════
+OPTIONAL AI-GENERATED IMAGES (For Enhanced Visual Appeal)
+═══════════════════════════════════════════════════════════════
+
+5. HERO IMAGE - Educational Technology
+   Filename: hero-education-tech.png
+   Prompt: "Modern university campus with digital data overlays, holographic 
+   student analytics floating in the air, clean professional aesthetic, teal 
+   and navy blue color scheme, bright natural lighting, wide angle view, 
+   photorealistic style"
+   
+   Usage: Can be placed as background in index.html hero section
+   Recommended Size: 1920x800px
+
+6. FEATURE ILLUSTRATION - Data Integration
+   Filename: feature-data-integration.png
+   Prompt: "Abstract visualization of data flowing from multiple sources 
+   converging into a central dashboard, geometric shapes representing different 
+   data streams (academic, financial, housing), teal gradient, clean minimal 
+   design, vector illustration style"
+   
+   Usage: Can enhance solution.html or data.html sections
+   Recommended Size: 800x600px
+
+7. FEATURE ILLUSTRATION - Predictive Analytics
+   Filename: feature-predictive-analytics.png
+   Prompt: "3D isometric illustration of machine learning algorithm analyzing 
+   student data, nodes and connections forming a neural network pattern, 
+   glowing teal and cyan accents, dark background, modern tech aesthetic, 
+   digital art style"
+   
+   Usage: Can enhance research.html or solution.html sections
+   Recommended Size: 800x600px
+
+8. FEATURE ILLUSTRATION - Collaboration
+   Filename: feature-collaboration.png
+   Prompt: "Diverse group of university advisors collaborating around a large 
+   digital dashboard display, modern office setting, natural professional 
+   appearance, teal accent lighting, warm atmosphere, cinematic composition, 
+   photorealistic"
+   
+   Usage: Can enhance problem.html or ethics.html sections
+   Recommended Size: 800x600px
+
+9. ICON SET - Student Support
+   Filename: icon-student-support.png
+   Prompt: "Set of 6 clean modern icons representing: academic advising, 
+   financial aid, student engagement, housing services, data analytics, 
+   early warning alerts. Teal and navy color scheme, minimalist line art 
+   style, transparent background"
+   
+   Usage: Can be split and used throughout various pages
+   Recommended Size: 1200x400px (6 icons in a row)
+
+10. ABSTRACT BACKGROUND - Data Patterns
+    Filename: background-data-pattern.png
+    Prompt: "Subtle abstract pattern of interconnected dots and lines forming 
+    a network, very light teal on white background, low opacity, perfect for 
+    website background texture, seamless tile, minimal design"
+    
+    Usage: Can be used as subtle background pattern in hero sections
+    Recommended Size: 1000x1000px (tileable)
+
+11. FEATURE ILLUSTRATION - Student Success Journey
+    Filename: feature-student-journey.png
+    Prompt: "Upward trending pathway showing student progression from at-risk 
+    to success, milestone markers along the way, hopeful and motivational mood, 
+    teal and green gradient, clean vector illustration style, light background"
+    
+    Usage: Can enhance lessons.html or appendix.html sections
+    Recommended Size: 800x500px
+
+12. DECORATIVE ELEMENT - Achievement
+    Filename: decorative-achievement.png
+    Prompt: "Graduation cap with digital data particles dispersing upward, 
+    symbolizing achievement through data-driven support, teal and gold colors, 
+    celebratory mood, transparent background, 3D render style"
+    
+    Usage: Can be used in appendix.html or conclusion sections
+    Recommended Size: 600x600px
+
+
+═══════════════════════════════════════════════════════════════
+IMAGE GENERATION TIPS
+═══════════════════════════════════════════════════════════════
+
+DALL-E 3 Settings:
+- Quality: Standard or HD
+- Style: Natural (for realistic) or Vivid (for stylized)
+- Aspect Ratio: Adjust based on recommended size above
+
+Midjourney Settings:
+- Add parameters: --ar 16:9 (for wide images) or --ar 4:3 (for standard)
+- Add: --style raw (for photorealistic) or --stylize 500 (for artistic)
+- Add: --quality 2 (for higher detail)
+
+Stable Diffusion:
+- Steps: 30-50
+- CFG Scale: 7-10
+- Sampler: DPM++ 2M Karras or Euler a
+- Model: Stable Diffusion XL for best quality
+
+Post-Processing:
+- Optimize file size using tinypng.com or squoosh.app
+- Target: <500KB per image for fast web loading
+- Convert to WebP format for even smaller sizes (optional)
+- Add slight blur to backgrounds if using as hero images
+
+
+═══════════════════════════════════════════════════════════════
+COLOR PALETTE REFERENCE
+═══════════════════════════════════════════════════════════════
+
+When generating images, use these colors for brand consistency:
+
+Primary Teal:     #0d9488 (RGB: 13, 148, 136)
+Navy Blue:        #1e3a8a (RGB: 30, 58, 138)  
+Accent Cyan:      #06b6d4 (RGB: 6, 182, 212)
+Light Gray:       #f8fafc (RGB: 248, 250, 252)
+Text Dark:        #1e293b (RGB: 30, 41, 59)
+
+Ask the AI to incorporate "teal and navy blue color scheme" or provide 
+hex codes directly if the generator supports it.
+
+
+═══════════════════════════════════════════════════════════════
+PRIORITY ORDER
+═══════════════════════════════════════════════════════════════
+
+Essential (Required):
+1. Architecture Diagram (from report)
+2. ER Diagram (from report)
+3. Dashboard Main Screenshot (from live site)
+4. Dashboard Profile Screenshot (from live site)
+
+Nice to Have (Optional):
+5. Hero Image - Educational Technology
+6. Feature Illustration - Data Integration
+7. Feature Illustration - Predictive Analytics
+
+Use if Time Permits:
+8-12. Additional illustrations and decorative elements
+
+
+═══════════════════════════════════════════════════════════════
+ALTERNATIVE: STOCK PHOTOS
+═══════════════════════════════════════════════════════════════
+
+If AI generation is unavailable, use these free stock photo sites:
+- Unsplash.com (search: "university", "data", "analytics", "education")
+- Pexels.com (search: "student", "college", "learning", "technology")
+- Pixabay.com (search: "education technology", "data analysis")
+
+Filter by: Horizontal orientation, High resolution, Free for commercial use
+Download in highest resolution available
+
+
+═══════════════════════════════════════════════════════════════
+IMPLEMENTATION
+═══════════════════════════════════════════════════════════════
+
+After generating/downloading images:
+
+1. Save all images to /images/ directory
+2. Use exact filenames specified above
+3. Verify images load in HTML pages
+4. Check file sizes (<500KB each)
+5. Test lightbox functionality for diagrams
+6. Ensure images display correctly in both light and dark modes
+
+═══════════════════════════════════════════════════════════════
+
+Generated Images Tracking:
+[ ] architecture-diagram.png (REQUIRED)
+[ ] er-diagram.png (REQUIRED)
+[ ] dashboard-main.png (REQUIRED)
+[ ] dashboard-profile.png (REQUIRED)
+[ ] hero-education-tech.png (optional)
+[ ] feature-data-integration.png (optional)
+[ ] feature-predictive-analytics.png (optional)
+[ ] feature-collaboration.png (optional)
+[ ] icon-student-support.png (optional)
+[ ] background-data-pattern.png (optional)
+[ ] feature-student-journey.png (optional)
+[ ] decorative-achievement.png (optional)
+
+═══════════════════════════════════════════════════════════════
