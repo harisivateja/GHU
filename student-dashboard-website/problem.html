@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem Context - Centralized Student Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0d9488;
+            --color-primary-dark: #0f766e;
+            --color-secondary: #1e3a8a;
+            --color-accent: #06b6d4;
+            --color-bg: #ffffff;
+            --color-bg-secondary: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-light: #64748b;
+            --color-border: #e2e8f0;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-danger: #ef4444;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --radius-sm: 0.5rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --color-bg: #0f172a;
+            --color-bg-secondary: #1e293b;
+            --color-text: #f1f5f9;
+            --color-text-light: #94a3b8;
+            --color-border: #334155;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--color-bg);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--color-primary);
+            background: var(--color-bg-secondary);
+        }
+
+        .dark-toggle {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .dark-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-md);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .problem-overview {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(251, 146, 60, 0.1));
+            border-left: 4px solid var(--color-danger);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .problem-overview h3 {
+            color: var(--color-danger);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .issue-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .issue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .issue-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-danger), var(--color-warning));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .issue-card h3 {
+            color: var(--color-text);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+        }
+
+        .issue-card p {
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+
+        .stakeholders-section {
+            margin-top: var(--spacing-2xl);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-lg);
+            color: var(--color-text);
+        }
+
+        .stakeholder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .stakeholder-card {
+            background: var(--color-bg-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stakeholder-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .stakeholder-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stakeholder-card h4 {
+            color: var(--color-primary);
+            font-size: 1.25rem;
+        }
+
+        .pain-point {
+            background: rgba(239, 68, 68, 0.1);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .pain-point strong {
+            color: var(--color-danger);
+        }
+
+        .solution-req {
+            background: rgba(16, 185, 129, 0.1);
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-sm);
+        }
+
+        .solution-req strong {
+            color: var(--color-success);
+        }
+
+        footer {
+            background: var(--color-bg-secondary);
+            border-top: 1px solid var(--color-border);
+            padding: var(--spacing-xl) var(--spacing-md);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .footer-section h4 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-section a {
+            color: var(--color-text-light);
+            text-decoration: none;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-light);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: var(--spacing-md);
+                border-bottom: 1px solid var(--color-border);
+                box-shadow: var(--shadow-lg);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .issues-grid,
+            .stakeholder-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="./index.html" class="nav-brand">CSD Project</a>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./problem.html" class="active">Problem</a></li>
+                <li><a href="./research.html">Research</a></li>
+                <li><a href="./solution.html">Solution</a></li>
+                <li><a href="./architecture.html">Architecture</a></li>
+                <li><a href="./data.html">Data</a></li>
+                <li><a href="./dashboard.html">Dashboard</a></li>
+                <li><a href="./ethics.html">Ethics</a></li>
+                <li><a href="./lessons.html">Lessons</a></li>
+                <li><a href="./appendix.html">Appendix</a></li>
+                <li><button class="dark-toggle" onclick="toggleDarkMode()">🌙</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">Problem Context & Stakeholders</h1>
+            <p class="page-subtitle">Understanding the challenges of decentralized student data at Horizon State University</p>
+        </div>
+
+        <div class="problem-overview">
+            <h3>The Core Problem</h3>
+            <p>Horizon State University (HSU) lacked an <strong>Early Warning System for At-Risk Students</strong>. Critical student data resided in isolated departmental systems—Academic Affairs, Financial Aid, Housing, and Student Life—with no cross-functional integration or holistic student view. This fragmentation created systemic barriers to effective student support and retention.</p>
+        </div>
+
+        <div class="issues-grid">
+            <div class="issue-card">
+                <div class="issue-icon">⏱️</div>
+                <h3>Data Accessibility Crisis</h3>
+                <p>Advisors required <strong>15-20 minutes per student</strong> to manually query multiple systems, significantly delaying the identification of warning signs and coordination of support services. This inefficiency prevented timely interventions during critical periods when students needed support most.</p>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-icon">⚠️</div>
+                <h3>Reactive Interventions</h3>
+                <p>The university responded to <strong>manifest problems</strong> (e.g., academic probation after failing grades, financial counseling after payment defaults), missing critical opportunities for preventive action. Students fell through the cracks before warning signs were detected.</p>
+            </div>
+
+            <div class="issue-card">
+                <div class="issue-icon">📊</div>
+                <h3>Inconsistent Risk Assessment</h3>
+                <p>Different departments used <strong>varying criteria</strong> for risk evaluation, leading to non-standardized methodology for assessing combined risk factors and prioritizing limited intervention resources. This resulted in inefficient allocation of support services.</p>
+            </div>
+        </div>
+
+        <section class="stakeholders-section">
+            <h2 class="section-title">Key Stakeholders</h2>
+            <div class="stakeholder-grid">
+                <div class="stakeholder-card">
+                    <div class="stakeholder-header">
+                        <div class="stakeholder-avatar">AA</div>
+                        <h4>Academic Advisors</h4>
+                    </div>
+                    <div class="pain-point">
+                        <strong>Pain Point:</strong> Excessive time spent on manual data retrieval; difficulty tracking intervention outcomes and maintaining comprehensive student records.
+                    </div>
+                    <div class="solution-req">
+                        <strong>Solution Need:</strong> Student 360° Profile with unified data and persistent Advisor Notes for comprehensive documentation.
+                    </div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-header">
+                        <div class="stakeholder-avatar">DC</div>
+                        <h4>Department Chairs</h4>
+                    </div>
+                    <div class="pain-point">
+                        <strong>Pain Point:</strong> Inability to compare program performance (e.g., Engineering vs. Psychology) or justify resource allocation with evidence-based metrics.
+                    </div>
+                    <div class="solution-req">
+                        <strong>Solution Need:</strong> Comparative Department Performance charts and Deep Dive analytics for strategic planning.
+                    </div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-header">
+                        <div class="stakeholder-avatar">FA</div>
+                        <h4>Financial Aid Officers</h4>
+                    </div>
+                    <div class="pain-point">
+                        <strong>Pain Point:</strong> Disconnect between academic struggles and financial payment issues, preventing strategic aid targeting.
+                    </div>
+                    <div class="solution-req">
+                        <strong>Solution Need:</strong> Integrated Financial Card in 360° Profile to enable targeted financial interventions.
+                    </div>
+                </div>
+
+                <div class="stakeholder-card">
+                    <div class="stakeholder-header">
+                        <div class="stakeholder-avatar">IL</div>
+                        <h4>Institutional Leadership</h4>
+                    </div>
+                    <div class="pain-point">
+                        <strong>Pain Point:</strong> Need for high-level, real-time Key Performance Indicators (KPIs) for accreditation and strategic planning.
+                    </div>
+                    <div class="solution-req">
+                        <strong>Solution Need:</strong> Dashboard View with retention rate and at-risk student count KPIs for institutional oversight.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Project</h4>
+                <p>Centralized Student Dashboard</p>
+                <p>Horizon State University</p>
+            </div>
+            <div class="footer-section">
+                <h4>Team</h4>
+                <p>Shashank Manchikatla</p>
+                <p>Hari Siva Sai Teja Mogali</p>
+                <p>Manindra Porandla</p>
+                <p>Manohar Naidu Talari</p>
+                <p>Sandeep Thota</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links</h4>
+                <a href="https://harisivasaiteja.github.io/Studentdashboard/" target="_blank">Live Dashboard</a>
+                <a href="./appendix.html">Project Resources</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Group 20 - QuadraMind. Last Updated: January 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            document.querySelector('.dark-toggle').textContent = isDark ? '☀️' : '🌙';
+        }
+
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.querySelector('.dark-toggle').textContent = '☀️';
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.getAttribute('href').includes(currentPage)) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
